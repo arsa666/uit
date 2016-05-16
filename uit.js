@@ -658,3 +658,8 @@ Uit.CurrencyFormat = function (amount, returnEmptyNull) {
     }
 };
 
+// Jquery Mask Helper
+Uit.addMask = function (element, format) {
+    $(element).mask(format);
+};
+
