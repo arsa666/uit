@@ -616,12 +616,6 @@ Uit.Modal = function (options) {
             }
         });
 
-        $element.data('modal', $element);
-
-        if (options.renderTo) {
-            $(options.renderTo).append($element);
-        }
-
         $element.on('shown.bs.modal', function () {
             if (options.view instanceof Uit.View) {
                 options.view.render();
