@@ -616,7 +616,7 @@ Uit.Modal = function (options) {
             }
         });
 
-        if (options.renderTo) {
+        if (options.renderTo && $(options.renderTo).length) {
             $(options.renderTo).append($element);
         }
 
