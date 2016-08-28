@@ -591,7 +591,8 @@ Uit.Modal = function (options) {
     options = options || {};
     options.sizeModal = options.sizeModal || ''; //modal-lg
     options.view = options.view || '';
-    options.resize = options.resize || false;
+    options.resize = options.resize || false,
+    options.parentClassName = options.parentClassName || '';
 
     this.init = function () {
         var $element = $('<div class="modal" tabindex="-1" role="dialog"><div class="modal-dialog"><div class="modal-content"></div></div></div>');
@@ -616,8 +617,12 @@ Uit.Modal = function (options) {
             }
         });
 
-        if (options.renderTo && $(options.renderTo).length) {
-            $(options.renderTo).append($element);
+        if (options.parentClassName && $('.' + options.parentClassName).length) {
+            $element.attr('data-parent-classname', options.parentClassName);
+        }
+
+        if (options.parentClassName && $('.' + options.parentClassName).length) {
+            $element.attr('data-parent-classname', options.parentClassName);
         }
 
         $element.on('shown.bs.modal', function () {
