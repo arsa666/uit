@@ -671,3 +671,25 @@ Uit.addMask = function (element, format) {
     $(element).mask(format);
 };
 
+Uit.SessionFlash = {
+    rows: [],
+    set: function (key, value) {
+        var row = _.findWhere(this.rows, {'key': key});
+        if (row) {
+            row.value = value;
+        } else {
+            row = { 'key': key, 'value': value };
+            this.rows.push(row);
+        }
+    },
+    get: function (key) {
+        var row = _.findWhere(this.rows, {'key': key});
+        if (row) {
+            this.rows = _.without(this.rows, row);
+            return row.value;
+        } else {
+            return undefined;
+        }
+    }
+};
+
