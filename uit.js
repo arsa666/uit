@@ -376,9 +376,9 @@ Uit.View = Backbone.View.extend({
             if (!App.loginModel.hasAccess(id)) {
                 elem.remove();
             } else if (!App.loginModel.canEdit(id)) {
-                elem.find('input,select,textarea,button,a:not([role="tab"])').prop('disabled', true);
+                elem.find('input,select,textarea,button:not(.btn-close),a:not([role="tab"])').prop('disabled', true);
                 elem.find('input,select,textarea').css('background-image', 'none');
-                elem.find('.btn,button,a:not([role="tab"])').css('opacity', 0.5).off();
+                elem.find('.btn:not(.btn-close),button:not(.btn-close),a:not([role="tab"])').css('opacity', 0.5).off();
                 elem.find('.icon-typeahead-down').remove();
             }
         });
@@ -451,6 +451,13 @@ Uit.View = Backbone.View.extend({
         selector = _.isUndefined(selector) || _.isEmpty(selector) ? '.loader' : selector + ' .loader';
         if (!_.isUndefined(this.$el)) {
             this.$el.find(selector).remove();
+        }
+    },
+    onClose: function () {
+        if ($('.modal.in[data-parent-classname="' + this.className +  '"]').length) {
+            $('.modal.in[data-parent-classname="' + this.className +  '"]').each(function () {
+                $(this).data('bs.modal').$element.modal('hide');
+            });
         }
     }
 });
